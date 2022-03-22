@@ -1,4 +1,8 @@
 import { takeLatest, put, select } from "redux-saga/effects";
+import { WEATHER_ACTION_CONST } from "../../services/const/actionConst";
+import { weatherReducerWeatherApiCallActionSuccess, weatherReducerWeatherApiCallActionFailure } from "./weatherAction";
+
+const { WEATHER_API_CALL_ACTION } = WEATHER_ACTION_CONST;
 
 
 const addDelay = () => {
@@ -9,18 +13,34 @@ const addDelay = () => {
   })
 };
 
+//d46fe6f3b2e44fb8b52873c21312b71f
+//https://api.weatherbit.io/v2.0/current?city=""&country=""&key=""
+//GET
+
 function* getApiResult (action) {
-  // let apiResult = yield fetch(`https://jsonplaceholder.typicode.com/todos/${action.payload}`);
-  // apiResult = yield apiResult.json();
-  // // 무조건 성공이라 가정 (no need to put try & catch)
+  yield addDelay();
+  try {
+    // console.log(action.payload);
+    let apiResult = yield fetch(`https://api.weatherbit.io/v2.0/current?city=${action.payload.cityName}&country=${action.payload.country}&key=d46fe6f3b2e44fb8b52873c21312b71f`);
+    apiResult = yield apiResult.json();
+    // console.log(apiResult.data[0].city_name);
+    let organizedData = {
+      cityName: apiResult.data[0].city_name,
+      cityTemp: apiResult.data[0].temp,
+      cityWeather: {
+        icon: apiResult.data[0].weather.icon,
+        desc: apiResult.data[0].weather.description
+      }
+    }
 
-  // console.log(apiResult);
-
-  // yield addDelay();
-
-  // yield put(jphReducerGetApiResultSuccess(apiResult));
+    // check point 2
+    yield put(weatherReducerWeatherApiCallActionSuccess(organizedData));
+  } catch (err) {
+    console.log(err);
+    yield put(weatherReducerWeatherApiCallActionFailure(err));
+  }
 }
 
 export function* weatherSagaWatcher() {
-  // yield takeLatest (GET_API_RESULT, getApiResult);
+  yield takeLatest (WEATHER_API_CALL_ACTION, getApiResult)
 }
