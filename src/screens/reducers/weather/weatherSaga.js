@@ -1,7 +1,7 @@
 import { takeLatest, put, select } from "redux-saga/effects";
-import { WEATHER_ACTION_CONST } from "../../services/const/actionConst";
+import { WEATHER_ACTION_CONST } from "../../../services/const/actionConst";
 import { weatherReducerWeatherApiCallActionSuccess, weatherReducerWeatherApiCallActionFailure } from "./weatherAction";
-
+import { getWeatherAPI } from '../../../services/api';
 const { WEATHER_API_CALL_ACTION } = WEATHER_ACTION_CONST;
 
 
@@ -20,9 +20,8 @@ const addDelay = () => {
 function* getApiResult (action) {
   yield addDelay();
   try {
-    // console.log(action.payload);
-    let apiResult = yield fetch(`https://api.weatherbit.io/v2.0/current?city=${action.payload.cityName}&country=${action.payload.country}&key=d46fe6f3b2e44fb8b52873c21312b71f`);
-    apiResult = yield apiResult.json();
+    let apiResult = yield getWeatherAPI(action.payload);
+
     // console.log(apiResult.data[0].city_name);
     let organizedData = {
       cityName: apiResult.data[0].city_name,

@@ -1,7 +1,8 @@
 import React from 'react'
 import { cityList } from '../../cityList'
 import { useSelector, useDispatch } from 'react-redux'
-import { weatherReducerWeatherApiCallAction } from '../reducers/weatherAction'
+import { weatherReducerWeatherApiCallAction } from '../reducers/weather/weatherAction'
+import LoadingComponent from './reusable/LoadingComponent'
 
 const WeatherComponent = () => {
 
@@ -12,10 +13,10 @@ const WeatherComponent = () => {
   const onClickCity = (city) => {
     dispatch(weatherReducerWeatherApiCallAction(city))
   }
-  
-  // console.log(weatherReducerSelector.weatherApiResult.processing)
-  console.log(weatherReducerSelector.weatherApiResult.result);
 
+  console.log(weatherReducerSelector.weatherApiResult.processing)
+  console.log(weatherReducerSelector.weatherApiResult.result);
+  
   return (
     <div>
       <div>
@@ -27,17 +28,46 @@ const WeatherComponent = () => {
           )
         })}
       </div>
+      <div>
+        {(weatherReducerSelector.weatherApiResult.result !== null)
+        ?
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            {/* {weatherReducerSelector.weatherApiResult.result.cityWeather.desc}
+            {weatherReducerSelector.weatherApiResult.result.cityTemp} */}
+            <div style={{ fontWeight: 'bold', marginTop: '30px'}}>
+              {weatherReducerSelector.weatherApiResult.result.cityName}
+            </div>
+            <div>
+              Temp: {weatherReducerSelector.weatherApiResult.result.cityTemp}
+            </div>
+            <div>
+              Desc: {weatherReducerSelector.weatherApiResult.result.cityWeather.desc}
+            </div>
+            <img style={{width: '100px'}} src={`https://www.weatherbit.io/static/img/icons/${weatherReducerSelector.weatherApiResult.result.cityWeather.icon}.png`} alt="weather icon" />
+          </div>
+        :
+          null
+        }
+      </div>
+      <div>
+        {(weatherReducerSelector.weatherApiResult.processing === true)
+        ?
+          <LoadingComponent />
+        :
+          null
+        }
+      </div>
     </div>
   )
 }
 
 export default WeatherComponent
 
-// Loading Component 넣기 (Processing 값에 따라)
-// 성공적으로 api call을 했을 때, result 값을 이용해서 화면에 보여주기
-// Icon => Real Icon (https://www.weatherbit.io/static/img/icons/c04d.png)
-//      => <img src=`https://www.weatherbit.io/static/img/icons/...` />
 // + UI
 
 // .env
 
+
+// Git (Branch, Pull, Clone, Merge ....)
+// Gsocks
+// Portfolio 구상

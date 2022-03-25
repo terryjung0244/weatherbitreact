@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import weatherReducer from "../../screens/reducers/weatherReducer";
+import weatherReducer from "../../screens/reducers/weather/weatherReducer";
+import jphReducer from "../../screens/reducers/jph/jphReducer";
 
 export default combineReducers({
-  weatherReducer
+  weatherReducer,
+  jphReducer
 });
 
 // combineReducer = rootReducer
