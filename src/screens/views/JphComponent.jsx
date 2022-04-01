@@ -7,8 +7,8 @@ const JphComponent = () => {
   const jphReducerSelector = useSelector(state => state.jphReducer);
   const dispatch = useDispatch();
 
-  const onClickJph = () => {
-    dispatch(jphReducerJphApiCallAction(1))
+  const onClickJph = async () => {
+    dispatch(jphReducerJphApiCallAction(1));
   }
 
   console.log(jphReducerSelector.jphApiResult.result);
