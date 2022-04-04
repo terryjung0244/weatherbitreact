@@ -1,7 +1,7 @@
 import React from 'react'
 import WeatherComponent from './screens/views/WeatherComponent'
 import JphComponent from './screens/views/JphComponent';
-
+import TempComponent from './screens/views/TempComponent';
 
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
     <div>
       <WeatherComponent/>
       {/* <JphComponent/> */}
+      <TempComponent/>
     </div>
   )
 }

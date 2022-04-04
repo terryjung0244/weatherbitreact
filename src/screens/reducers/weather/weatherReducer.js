@@ -23,6 +23,7 @@ export default function weatherReducer(state = initState, action) {
       // draft.weatherApiResult.processed = true;
       break;
       case WEATHER_API_CALL_ACTION_SUCCESS:
+        console.log(action.payload)
         draft.weatherApiResult = { ...draft.weatherApiResult, processing: false, processed: true, message: 'successfully called api', result: action.payload }
         break;
       case WEATHER_API_CALL_ACTION_FAILURE:
