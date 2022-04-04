@@ -6,8 +6,6 @@ import JphComponent from './screens/views/JphComponent';
 
 const App = () => {
 
-  
-
   return (
     <div>
       <WeatherComponent/>

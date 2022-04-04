@@ -1,10 +1,14 @@
 export const cityList = [
   {
-    cityName: "Toronto",
+    cityName: "TORONTO",
     country: "CA",
   },
   {
-    cityName: "Vancouver",
+    cityName: "MONTREAL",
     country: "CA",
+  },
+  {
+    cityName: "ORLANDO",
+    country: "us"
   }
 ]
