@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div>
       <WeatherComponent/>
-      {/* <JphComponent/> */}
+      <JphComponent/>
       <TempComponent/>
     </div>
   )

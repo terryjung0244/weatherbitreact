@@ -11,7 +11,7 @@ const JphComponent = () => {
     dispatch(jphReducerJphApiCallAction(1));
   }
 
-  console.log(jphReducerSelector.jphApiResult.result);
+  // JSX (Javascript XML)
 
   return(
     <div>

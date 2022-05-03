@@ -17,7 +17,7 @@ function* getApiResult (action) {
   yield addDelay();
   try {
     let apiResult = yield getJphAPI(action.payload);
-
+    console.log(apiResult);
     yield put(jphReducerJphApiCallActionSuccess(apiResult));
   } catch (err) {
     console.log(err);
